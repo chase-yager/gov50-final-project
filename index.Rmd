@@ -11,4 +11,8 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to rates of COVID-19 infection, detection, treatment, and death on the basis of socioeconomic class in the United States. The focus will be on whether being located in a different socioeconomic class has a negative impact on the rates of detection and treatment of an illness such as COVID-19, and further on whether or not the rates of death when an illness is detected is altered based on this same metric. The ultimate goal would be to determine if there is an effect, and then explore possible explanations for that effect.
+I am interested in exploring data related to rates of COVID-19 infection, detection, treatment, and death on the basis of 
+socioeconomic class in the United States. The focus will be on whether being located in a different socioeconomic class 
+has a negative impact on the rates of detection and treatment of an illness such as COVID-19, and further on whether or 
+not the rates of death when an illness is detected is altered based on this same metric. The ultimate goal would be to 
+determine if there is an effect, and then explore possible explanations for that effect.
