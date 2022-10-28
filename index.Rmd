@@ -16,3 +16,10 @@ socioeconomic class in the United States. The focus will be on whether being loc
 has a negative impact on the rates of detection and treatment of an illness such as COVID-19, and further on whether or 
 not the rates of death when an illness is detected is altered based on this same metric. The ultimate goal would be to 
 determine if there is an effect, and then explore possible explanations for that effect.
+
+The question which I am seeking to answer with my research is what the impact of poverty levels are on the incidence and 
+mortality rates of COVID-19. My hypothesis is that areas with higher poverty will experience higher case counts and mortality 
+rates due to a lack of access to the high quality healthcare and lower rates of insurance. The explanatory variable will be 
+poverty rates by county in the US. The outcome variable will be incidence of COVID-19 and number of deaths. If the incidence 
+rate and death rate are higher in counties with higher poverty, then this would support our hypothesis. If the rates are the 
+same, however, this would disprove our hypothesis and indicate equivalent access to care among poor and wealthy Americans.
