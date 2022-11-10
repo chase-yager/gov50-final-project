@@ -24,7 +24,7 @@ poverty rates by county in the US. The outcome variable will be incidence of COV
 rate and death rate are higher in counties with higher poverty, then this would support our hypothesis. If the rates are the 
 same, however, this would disprove our hypothesis and indicate equivalent access to care among poor and wealthy Americans.
 
-
+## Data Assembly
 ```{r}
 library(tidyverse)
 library(ggplot2)
@@ -140,7 +140,27 @@ dataset <- poverty |>
 
 ```{r}
 dataset <- dataset |>
-  mutate(Poverty_Count = X.3, Poverty_Perc = X.6) |>
+  mutate(Poverty_Count = X.3, Poverty_Perc = as.numeric(X.6)) |>
   select(countyFIPS, County_Name, final_count, final_deaths, Poverty_Count, Poverty_Perc)
+```
+## Data Visualization
+```{r}
+pov_count_graph <- dataset |>
+  ggplot(mapping = aes (x = Poverty_Perc, y = final_count)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "blue") +
+  scale_y_log10() +
+  labs(x = "Percent in Poverty by County", y = "Number of Confirmed Cases", title = "Comparison Between Poverty Rate and COVID Cases by County")
+pov_count_graph
+```
+```{r}
+pov_death_graph <- dataset |>
+  ggplot(mapping = aes (x = Poverty_Perc, y = final_deaths)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "blue") +
+  scale_y_log10() +
+  labs(x = "Percent in Poverty by County", y = "Number of Confirmed Deaths", title = "Comparison Between Poverty Rate and COVID Deaths by County")
+
+pov_death_graph
 ```
 
