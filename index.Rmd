@@ -56,11 +56,85 @@ count_deaths <- fin_cases |>
 ```
 
 ```{r}
-poverty |>
-  select(X.1)
+poverty <- poverty |>
+  mutate(X = as.numeric(X))
+```
+```{r}
+count_deaths <- count_deaths |>
+  mutate(countyFIPS = as.numeric(countyFIPS))
 ```
 
 
+```{r}
+poverty$X[poverty$X.1 == "AL"] <- (poverty$X[poverty$X.1 == "AL"] + 1000) 
+poverty$X[poverty$X.1 == "AK"] <- (poverty$X[poverty$X.1 == "AK"] + 2000)
+poverty$X[poverty$X.1 == "AZ"] <- (poverty$X[poverty$X.1 == "AZ"] + 4000) 
+poverty$X[poverty$X.1 == "AR"] <- (poverty$X[poverty$X.1 == "AR"] + 5000) 
+poverty$X[poverty$X.1 == "CA"] <- (poverty$X[poverty$X.1 == "CA"] + 6000) 
+poverty$X[poverty$X.1 == "CO"] <- (poverty$X[poverty$X.1 == "CO"] + 8000) 
+poverty$X[poverty$X.1 == "CT"] <- (poverty$X[poverty$X.1 == "CT"] + 9000) 
+poverty$X[poverty$X.1 == "DE"] <- (poverty$X[poverty$X.1 == "DE"] + 10000) 
+poverty$X[poverty$X.1 == "DC"] <- (poverty$X[poverty$X.1 == "DC"] + 11000) 
+poverty$X[poverty$X.1 == "FL"] <- (poverty$X[poverty$X.1 == "FL"] + 12000) 
+poverty$X[poverty$X.1 == "GA"] <- (poverty$X[poverty$X.1 == "GA"] + 13000) 
+poverty$X[poverty$X.1 == "HI"] <- (poverty$X[poverty$X.1 == "HI"] + 15000) 
+poverty$X[poverty$X.1 == "ID"] <- (poverty$X[poverty$X.1 == "ID"] + 16000) 
+poverty$X[poverty$X.1 == "IL"] <- (poverty$X[poverty$X.1 == "IL"] + 17000) 
+poverty$X[poverty$X.1 == "IN"] <- (poverty$X[poverty$X.1 == "IN"] + 18000) 
+poverty$X[poverty$X.1 == "IA"] <- (poverty$X[poverty$X.1 == "IA"] + 19000) 
+poverty$X[poverty$X.1 == "KS"] <- (poverty$X[poverty$X.1 == "KS"] + 20000) 
+poverty$X[poverty$X.1 == "KY"] <- (poverty$X[poverty$X.1 == "KY"] + 21000) 
+poverty$X[poverty$X.1 == "LA"] <- (poverty$X[poverty$X.1 == "LA"] + 22000) 
+poverty$X[poverty$X.1 == "ME"] <- (poverty$X[poverty$X.1 == "ME"] + 23000) 
+poverty$X[poverty$X.1 == "MD"] <- (poverty$X[poverty$X.1 == "MD"] + 24000) 
+poverty$X[poverty$X.1 == "MA"] <- (poverty$X[poverty$X.1 == "MA"] + 25000)
+poverty$X[poverty$X.1 == "MI"] <- (poverty$X[poverty$X.1 == "MI"] + 26000) 
+poverty$X[poverty$X.1 == "MN"] <- (poverty$X[poverty$X.1 == "MN"] + 27000) 
+poverty$X[poverty$X.1 == "MS"] <- (poverty$X[poverty$X.1 == "MS"] + 28000) 
+poverty$X[poverty$X.1 == "MO"] <- (poverty$X[poverty$X.1 == "MO"] + 29000) 
+poverty$X[poverty$X.1 == "MT"] <- (poverty$X[poverty$X.1 == "MT"] + 30000) 
+poverty$X[poverty$X.1 == "NE"] <- (poverty$X[poverty$X.1 == "NE"] + 31000) 
+poverty$X[poverty$X.1 == "NV"] <- (poverty$X[poverty$X.1 == "NV"] + 32000) 
+poverty$X[poverty$X.1 == "NH"] <- (poverty$X[poverty$X.1 == "NH"] + 33000) 
+poverty$X[poverty$X.1 == "NJ"] <- (poverty$X[poverty$X.1 == "NJ"] + 34000) 
+poverty$X[poverty$X.1 == "NY"] <- (poverty$X[poverty$X.1 == "NY"] + 36000)
+poverty$X[poverty$X.1 == "NC"] <- (poverty$X[poverty$X.1 == "NC"] + 37000) 
+poverty$X[poverty$X.1 == "ND"] <- (poverty$X[poverty$X.1 == "ND"] + 38000)
+poverty$X[poverty$X.1 == "OH"] <- (poverty$X[poverty$X.1 == "OH"] + 39000)
+poverty$X[poverty$X.1 == "OK"] <- (poverty$X[poverty$X.1 == "OK"] + 40000)
+poverty$X[poverty$X.1 == "OR"] <- (poverty$X[poverty$X.1 == "OR"] + 41000) 
+poverty$X[poverty$X.1 == "PA"] <- (poverty$X[poverty$X.1 == "PA"] + 42000) 
+poverty$X[poverty$X.1 == "RI"] <- (poverty$X[poverty$X.1 == "RI"] + 44000) 
+poverty$X[poverty$X.1 == "SC"] <- (poverty$X[poverty$X.1 == "SC"] + 45000) 
+poverty$X[poverty$X.1 == "SD"] <- (poverty$X[poverty$X.1 == "SD"] + 46000) 
+poverty$X[poverty$X.1 == "TN"] <- (poverty$X[poverty$X.1 == "TN"] + 47000) 
+poverty$X[poverty$X.1 == "TX"] <- (poverty$X[poverty$X.1 == "TX"] + 48000) 
+poverty$X[poverty$X.1 == "UT"] <- (poverty$X[poverty$X.1 == "UT"] + 49000) 
+poverty$X[poverty$X.1 == "VT"] <- (poverty$X[poverty$X.1 == "VT"] + 50000) 
+poverty$X[poverty$X.1 == "VA"] <- (poverty$X[poverty$X.1 == "VA"] + 51000) 
+poverty$X[poverty$X.1 == "WA"] <- (poverty$X[poverty$X.1 == "WA"] + 53000) 
+poverty$X[poverty$X.1 == "WV"] <- (poverty$X[poverty$X.1 == "WV"] + 54000) 
+poverty$X[poverty$X.1 == "WI"] <- (poverty$X[poverty$X.1 == "WI"] + 55000) 
+poverty$X[poverty$X.1 == "WY"] <- (poverty$X[poverty$X.1 == "WY"] + 56000) 
+```
 
 
+```{r}
+poverty <- poverty |>
+  mutate(countyFIPS = X)
+```
+
+```{r}
+poverty <- poverty |>
+  subset(countyFIPS!=0)
+```
+```{r}
+count_deaths <- count_deaths |>
+  subset(countyFIPS != 0)
+```
+
+```{r}
+poverty |>
+  inner_join(count_deaths)
+```
 
