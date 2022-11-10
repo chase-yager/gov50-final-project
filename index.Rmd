@@ -23,3 +23,40 @@ rates due to a lack of access to the high quality healthcare and lower rates of 
 poverty rates by county in the US. The outcome variable will be incidence of COVID-19 and number of deaths. If the incidence 
 rate and death rate are higher in counties with higher poverty, then this would support our hypothesis. If the rates are the 
 same, however, this would disprove our hypothesis and indicate equivalent access to care among poor and wealthy Americans.
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r}
+cases <- read.csv("data/covid_confirmed_usafacts.csv")
+deaths <- read.csv("data/covid_deaths_usafacts.csv")
+poverty <- read.csv("data/poverty_by_county.csv")
+```
+```{r}
+fin_cases <- cases |>
+  select(countyFIPS, County.Name, X2022.10.14) |>
+  mutate(final_count = X2022.10.14) |>
+  select(countyFIPS, County.Name, final_count)
+```
+```{r}
+fin_deaths <- deaths |>
+  select(countyFIPS, County.Name, X2022.10.14) |>
+  mutate(final_deaths = X2022.10.14) |>
+  select(countyFIPS, County.Name, final_deaths)
+```
+
+```{r}
+fin_cases |>
+  inner_join(fin_deaths, by = "countyFIPS") |>
+  mutate(County_Name = County.Name.x) |>
+  select(countyFIPS, County_Name, final_count, final_deaths)
+```
+
+
+
+
+
+
