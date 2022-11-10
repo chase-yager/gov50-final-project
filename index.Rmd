@@ -134,7 +134,13 @@ count_deaths <- count_deaths |>
 ```
 
 ```{r}
-poverty |>
+dataset <- poverty |>
   inner_join(count_deaths)
+```
+
+```{r}
+dataset <- dataset |>
+  mutate(Poverty_Count = X.3, Poverty_Perc = X.6) |>
+  select(countyFIPS, County_Name, final_count, final_deaths, Poverty_Count, Poverty_Perc)
 ```
 
