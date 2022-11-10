@@ -49,12 +49,16 @@ fin_deaths <- deaths |>
 ```
 
 ```{r}
-fin_cases |>
+count_deaths <- fin_cases |>
   inner_join(fin_deaths, by = "countyFIPS") |>
   mutate(County_Name = County.Name.x) |>
   select(countyFIPS, County_Name, final_count, final_deaths)
 ```
 
+```{r}
+poverty |>
+  select(X.1)
+```
 
 
 
