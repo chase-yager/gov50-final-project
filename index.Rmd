@@ -28,6 +28,7 @@ same, however, this would disprove our hypothesis and indicate equivalent access
 ```{r}
 library(tidyverse)
 library(ggplot2)
+library(broom)
 ```
 
 ```{r}
@@ -162,5 +163,39 @@ pov_death_graph <- dataset |>
   labs(x = "Percent in Poverty by County", y = "Number of Confirmed Deaths", title = "Comparison Between Poverty Rate and COVID Deaths by County")
 
 pov_death_graph
+```
+
+## Analysis
+
+```{r}
+dataset <- dataset |>
+  mutate(per_fatal = 100*(final_deaths/final_count))
+```
+```{r}
+perc_comp_fig <- dataset |>
+  ggplot(mapping = aes(x = Poverty_Perc, y = per_fatal)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "blue") +
+  labs(title = "Percentage in Poverty Compared to Percentage of Cases that were Fatal", x = "Poverty Percentage", y = "Percentage of Cases that were Fatal")
+perc_comp_fig
+```
+```{r}
+fit <- lm(per_fatal ~ Poverty_Perc, data = dataset) 
+
+fit |>
+  broom::tidy() |>
+  select(term, estimate) |>
+  knitr::kable()
+```
+From the linear regression run with percentage of the population in poverty as the predictor and the percentage of 
+cases that were fatal as the outcome variable, the results indicate an intercept of .719 and a slope of .054. This 
+indicates that, in the case when there was zero poverty we would expect to see a percentage of fatal cases of .719%. 
+Additionally, the slope indicates that for every 1% increase in the poverty percentage, we would see a .05% increase 
+in the fatality rate. This is a relatively small relationship, however the positive relationship still supports the 
+original hypothesis that places with a higher poverty rate would experience higher rates of covid fatalities. 
+
+```{r}
+fit.sum <- summary(fit)
+
 ```
 
