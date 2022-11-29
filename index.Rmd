@@ -196,6 +196,6 @@ original hypothesis that places with a higher poverty rate would experience high
 
 ```{r}
 fit.sum <- summary(fit)
-
+fit.sum
 ```
 
