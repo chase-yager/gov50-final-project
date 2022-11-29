@@ -198,4 +198,8 @@ original hypothesis that places with a higher poverty rate would experience high
 fit.sum <- summary(fit)
 fit.sum
 ```
+```{r}
+fit |>
+  tidy()
+```
 
