@@ -9,7 +9,7 @@ output:
 
 
 
-## Project thoughts
+## Project thoughts test
 
 I am interested in exploring data related to rates of COVID-19 infection, detection, treatment, and death on the basis of 
 socioeconomic class in the United States. The focus will be on whether being located in a different socioeconomic class 
