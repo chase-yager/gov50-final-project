@@ -144,6 +144,40 @@ dataset <- dataset |>
   mutate(Poverty_Count = X.3, Poverty_Perc = as.numeric(X.6)) |>
   select(countyFIPS, County_Name, final_count, final_deaths, Poverty_Count, Poverty_Perc)
 ```
+
+The population data was assembled outside of this markdown file as the dataset was well over 
+100 MB and needed to be further cleaned prior to its upload to github. Details of how this was done can be seen below:
+```{r eval=FALSE}
+data <- read.csv("cc-est2019-alldata.csv")
+```
+```{r eval=FALSE}
+data <- data |>
+  select(STATE, COUNTY, STNAME, CTYNAME, YEAR, AGEGRP, TOT_POP, WA_MALE, WA_FEMALE) |>
+  filter(AGEGRP == 0, YEAR == 12) |>
+  mutate(STATE = STATE *1000) |>
+  mutate(COUNTY = COUNTY + STATE)
+```
+```{r eval=FALSE}
+data2 <- data |>
+  select(COUNTY, CTYNAME, TOT_POP, WA_MALE, WA_FEMALE) |>
+  mutate(NWhite = TOT_POP - (WA_MALE + WA_FEMALE),
+         countyFIPS = COUNTY) |>
+  select(countyFIPS, CTYNAME, TOT_POP, NWhite) |>
+  mutate(perc_n_white = NWhite/TOT_POP)
+```
+```{r eval=FALSE}
+write.csv(data2, "C:\\Users\\chaseyager\\Classes\\GOV50\\final_project\\gov50-final\\data_clean\\pop.csv")
+```
+```{r}
+pop <- read.csv("data/pop.csv")
+```
+```{r}
+dataset <- dataset |>
+  inner_join(pop, by = "countyFIPS") |>
+  select(countyFIPS, County_Name, final_count, final_deaths, Poverty_Count, Poverty_Perc, TOT_POP, NWhite, perc_n_white)
+```
+
+
 ## Data Visualization
 ```{r}
 pov_count_graph <- dataset |>
@@ -169,7 +203,8 @@ pov_death_graph
 
 ```{r}
 dataset <- dataset |>
-  mutate(per_fatal = 100*(final_deaths/final_count))
+  mutate(per_fatal = 100*(final_deaths/final_count),
+         perc_n_white = 100*(perc_n_white))
 ```
 ```{r}
 perc_comp_fig <- dataset |>
@@ -180,7 +215,33 @@ perc_comp_fig <- dataset |>
 perc_comp_fig
 ```
 ```{r}
-fit <- lm(per_fatal ~ Poverty_Perc, data = dataset) 
+dataset |>
+  ggplot(mapping = aes(x = perc_n_white, y = per_fatal)) +
+  geom_point() +
+  geom_smooth(method = "lm", color = "blue") +
+  labs(title = "Percentage Non-White Population Compared to Percentage of Fatal Cases", x = "Percentage Non-White",
+       y = "Percentage of Cases that were Fatal")
+```
+
+```{r}
+fit2 <- lm(per_fatal ~ perc_n_white, data = dataset) 
+
+fit2 |>
+  broom::tidy() |>
+  select(term, estimate) |>
+  knitr::kable()
+```
+
+```{r}
+fit3 <- lm(per_fatal ~ Poverty_Perc, data = dataset) 
+
+fit3 |>
+  broom::tidy() |>
+  select(term, estimate) |>
+  knitr::kable()
+```
+```{r}
+fit <- lm(per_fatal ~ Poverty_Perc + perc_n_white, data = dataset) 
 
 fit |>
   broom::tidy() |>
