@@ -145,8 +145,10 @@ dataset <- dataset |>
   select(countyFIPS, County_Name, final_count, final_deaths, Poverty_Count, Poverty_Perc)
 ```
 
+
 The population data was assembled outside of this markdown file as the dataset was well over 
 100 MB and needed to be further cleaned prior to its upload to github. Details of how this was done can be seen below:
+
 ```{r eval=FALSE}
 data <- read.csv("cc-est2019-alldata.csv")
 ```
@@ -199,7 +201,6 @@ pov_death_graph <- dataset |>
 pov_death_graph
 ```
 
-## Analysis
 
 ```{r}
 dataset <- dataset |>
@@ -214,6 +215,7 @@ perc_comp_fig <- dataset |>
   labs(title = "Percentage in Poverty Compared to Percentage of Cases that were Fatal", x = "Poverty Percentage", y = "Percentage of Cases that were Fatal")
 perc_comp_fig
 ```
+
 ```{r}
 dataset |>
   ggplot(mapping = aes(x = perc_n_white, y = per_fatal)) +
@@ -222,6 +224,10 @@ dataset |>
   labs(title = "Percentage Non-White Population Compared to Percentage of Fatal Cases", x = "Percentage Non-White",
        y = "Percentage of Cases that were Fatal")
 ```
+## Analysis
+
+
+
 
 ```{r}
 fit2 <- lm(per_fatal ~ perc_n_white, data = dataset) 
