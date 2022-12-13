@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data/covid_confirmed_usafacts.csv","data/covid_deaths_usafacts.csv","data/pop.csv","data/poverty_by_county.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-14-1.png","index_files/figure-html5/unnamed-chunk-15-1.png","index_files/figure-html5/unnamed-chunk-17-1.png","index_files/figure-html5/unnamed-chunk-20-1.png","index_files/figure-html5/unnamed-chunk-21-1.png","index_files/figure-html5/unnamed-chunk-23-1.png","index_files/figure-html5/unnamed-chunk-24-1.png","index_files/figure-html5/unnamed-chunk-26-1.png","index_files/header-attrs-2.16/header-attrs.js","index_files/header-attrs-2.17/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/covid_confirmed_usafacts.csv","data/covid_deaths_usafacts.csv","data/pop.csv","data/poverty_by_county.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-14-1.png","index_files/figure-html5/unnamed-chunk-15-1.png","index_files/figure-html5/unnamed-chunk-17-1.png","index_files/figure-html5/unnamed-chunk-20-1.png","index_files/figure-html5/unnamed-chunk-21-1.png","index_files/figure-html5/unnamed-chunk-23-1.png","index_files/figure-html5/unnamed-chunk-24-1.png","index_files/figure-html5/unnamed-chunk-26-1.png","index_files/figure-html5/unnamed-chunk-27-1.png","index_files/header-attrs-2.16/header-attrs.js","index_files/header-attrs-2.17/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1710,7 +1710,7 @@ however, this would disprove our hypothesis and indicate equivalent access to ca
 <h2 id="data">Data</h2>
 <p>Sources of the data can be found at the bottom of the page. For poverty and race data all information came from the
 US Census. For COVID infections and death, data was taken from USA Facts which collects government data and in this
-case collected all information directly from each states reports.</p>
+case collected all information directly from each states’ reports.</p>
 <p>The research method used most closely resembles a cross-sectional approach, where the treatment is the rates of
 poverty, and the outcome is the rate of incidence and the mortality rates of COVID-19 in the different groups. This
 study would fall under this category because of the way in which the data was measured. The results of this study
@@ -1772,6 +1772,8 @@ The dependent variable is summarized in the following graph:</p>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-23-1.png" width="624" /></p>
 </div>
+<p>As can be seen. the middle 50% of the dependent variable is located at the lower end, falling between roughly 1.2%
+and 1.8% for mortality rate, and the median being located at slightly over 1.25%.</p>
 <h2 id="results">Results</h2>
 <p>The results of this study can be seen below represented in two separate graphs. The first graph is a a presentation
 of our regression results comparing our independent variable, which was the percentage of people in poverty by
@@ -1815,9 +1817,34 @@ county in the US, and our dependent variable, which is the mortality rates by co
 </tbody>
 </table>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit3</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = per_fatal ~ Poverty_Perc, data = dataset)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.9653 -0.4399 -0.1148  0.2806  7.4688 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.719498   0.037385   19.25   &lt;2e-16 ***
+Poverty_Perc 0.054159   0.002541   21.32   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.7651 on 3104 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.1277,    Adjusted R-squared:  0.1274 
+F-statistic: 454.4 on 1 and 3104 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
 <p>It is clear from the linear regression superimposed on the graph that there is a positive correlation between
 poverty percentage and the percentage of cases that were fatal. The fit run on the same data demonstrates an
-intercept of .719 and a slope of .054. This indicates that the estimated mortality rates when poverty is 0 would be
+intercept of .719 and a slope of .054, with a p-value on bath variables of 2x10^-16 (effectively 0) indicating
+highly significant results. This indicates that the estimated mortality rates when poverty is 0 would be
 .719%, and that for every 1% increase in poverty percentage in a county, we would see a .054% increase in the
 percentage of cases that were fatal. This would appear to confirm our hypothesis, however it is important to
 consider confounding variable that may influence the results.</p>
@@ -1832,7 +1859,7 @@ divides. It is for this reason that race data was also looked at as a possible d
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Percentage Non-White Population Compared to Percentage of Fatal Cases"</span>, x <span class='op'>=</span> <span class='st'>"Percentage Non-White"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Percentage of Cases that were Fatal"</span><span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-26-1.png" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-27-1.png" width="624" /></p>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -1862,9 +1889,34 @@ divides. It is for this reason that race data was also looked at as a possible d
 </tbody>
 </table>
 </div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit2</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = per_fatal ~ perc_n_white, data = dataset)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.7958 -0.4878 -0.1306  0.2885  7.5932 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.3745916  0.0202028  68.040  &lt; 2e-16 ***
+perc_n_white 0.0055188  0.0008936   6.176 7.42e-10 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.8142 on 3104 degrees of freedom
+  (2 observations deleted due to missingness)
+Multiple R-squared:  0.01214,   Adjusted R-squared:  0.01182 
+F-statistic: 38.15 on 1 and 3104 DF,  p-value: 7.42e-10</code></pre>
+</div>
 <p>Much like the previous results from our main relationship of interest, this graph demonstrates a positive
 relationship between the percentage of a counties population which is non-white, and the percentage of COVID-19
-cases which were fatal. The fit run on this data gives an intercept of 1.37 and a slope of .006. This means that the
+cases which were fatal. The fit run on this data gives an intercept of 1.37 and a slope of .006, again with both of
+these results being highly significant as the p-value was effectively 0. This means that the
 expected percentage of fatal cases when a population is entirely white is 1.37%, and that for every 1% increase in
 the percentage of the population which is non-white, we expect to see a .006% increase in the percentage of cases
 which were fatal.</p>
@@ -1988,7 +2040,7 @@ density of counties which may have contributed to the rates of COVID exposure.</
 <p>Poverty Data: <a href="https://www.census.gov/data/datasets/2020/demo/saipe/2020-state-and-county.html">US Census</a></p>
 <p>Infection and Death Rates: <a href="https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/">USA Facts</a></p>
 <p>Population Race Data: <a href="https://www.census.gov/data/tables/time-series/demo/popest/2010s-counties-detail.html">US Census</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
